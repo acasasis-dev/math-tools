@@ -13,9 +13,8 @@ def covariance(x, y, labels=("x", "y")):
 	if len(x) != len(y):
 		raise Exception(f"length of x must be the same as y. {len(x)} != {len(y)}")
 	
-	if labels:
-		if len(labels) != 2:
-			raise Exception(f"length of labels must exactly be 2")
+	if len(labels) != 2:
+		raise Exception(f"length of labels must exactly be 2")
 
 	x_label, y_label = labels
 
@@ -24,12 +23,17 @@ def covariance(x, y, labels=("x", "y")):
 	y_latex, y_mean = points_mean_solution_latex(y, y_label)
 	output += y_latex
 	output += "\t\\\\\n"
-	output += f"\tCov[\\text{{{x_label}}}, \\text{{{y_label}}}] = "
+	cov_prefix = f"\tCov[\\text{{{x_label}}}, \\text{{{y_label}}}] = "
+	output += cov_prefix
 	cov_numerator = []
+	cov_numerator_products = []
 	for i in range(len(x)):
 		cov_numerator.append(f"({x[i] - x_mean})({y[i] - y_mean})")
+		cov_numerator_products.append((x[i] - x_mean) * (y[i] - y_mean))
 	
 	output += f"\\frac{{{" + ".join(cov_numerator)}}}{{{len(x)} - 1}} \\\\ \n"
+	output += cov_prefix
+	output += f"\\frac{{{" + ".join(list(map(str, cov_numerator_products)))}}}{{{len(x)} - 1}} \\\\ \n"
 
 	output += "\\end{gather*}"
 	return output
