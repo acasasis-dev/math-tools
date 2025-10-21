@@ -6,7 +6,7 @@ def points_mean_solution_latex(points, points_label):
 	points_len = len(points)
 	return (
 		f"\t\\sigma_{{\\text{{{points_label}}}}} = \\frac{{{points_stringified}}}{{{points_len}}} = \\frac{{{sum(points)}}}{{{points_len}}} = {points_mean} \\\\\n"
-	)
+	), points_mean
 
 def covariance(x, y, labels=("x", "y")):
 	output = "\\begin{gather*}\n"
@@ -18,9 +18,18 @@ def covariance(x, y, labels=("x", "y")):
 			raise Exception(f"length of labels must exactly be 2")
 
 	x_label, y_label = labels
+
+	x_latex, x_mean = points_mean_solution_latex(x, x_label)
+	output += x_latex
+	y_latex, y_mean = points_mean_solution_latex(y, y_label)
+	output += y_latex
+	output += "\t\\\\\n"
+	output += f"\tCov[\\text{{{x_label}}}, \\text{{{y_label}}}] = "
+	cov_numerator = []
+	for i in range(len(x)):
+		cov_numerator.append(f"({x[i] - x_mean})({y[i] - y_mean})")
 	
-	output += points_mean_solution_latex(x, x_label)
-	output += points_mean_solution_latex(y, y_label)
+	output += f"\\frac{{{" + ".join(cov_numerator)}}}{{{len(x)} - 1}} \\\\ \n"
 
 	output += "\\end{gather*}"
 	return output
