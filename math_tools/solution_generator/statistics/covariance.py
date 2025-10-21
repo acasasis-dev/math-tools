@@ -33,9 +33,11 @@ def covariance(x, y, labels=("x", "y")):
 	
 	output += f"\\frac{{{" + ".join(cov_numerator)}}}{{{len(x)} - 1}} \\\\ \n"
 	output += cov_prefix
-	output += f"\\frac{{{" + ".join(list(map(str, cov_numerator_products)))}}}{{3}} \\\\ \n"
+	output += f"\\frac{{{" + ".join(list(map(str, cov_numerator_products)))}}}{{{len(x) - 1}}} \\\\ \n"
 	output += cov_prefix
-	output += f"\\frac{{{sum(cov_numerator_products)}}}{{3}} \\\\ \n"
+	output += f"\\frac{{{sum(cov_numerator_products)}}}{{{len(x) - 1}}} \\\\ \n"
+	output += cov_prefix
+	output += f"{sum(cov_numerator_products) / (len(x) - 1)} \n"
 
 	output += "\\end{gather*}"
 	return output
