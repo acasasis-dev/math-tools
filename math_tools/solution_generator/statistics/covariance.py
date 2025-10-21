@@ -28,14 +28,14 @@ def covariance(x, y, labels=("x", "y")):
 	cov_numerator = []
 	cov_numerator_products = []
 	for i in range(len(x)):
-		cov_numerator.append(f"({x[i] - x_mean})({y[i] - y_mean})")
-		cov_numerator_products.append((x[i] - x_mean) * (y[i] - y_mean))
+		cov_numerator.append(f"({round(x[i] - x_mean, 2)})({round(y[i] - y_mean, 2)})")
+		cov_numerator_products.append(round((x[i] - x_mean) * (y[i] - y_mean), 2))
 	
 	output += f"\\frac{{{" + ".join(cov_numerator)}}}{{{len(x)} - 1}} \\\\ \n"
 	output += cov_prefix
 	output += f"\\frac{{{" + ".join(list(map(str, cov_numerator_products)))}}}{{{len(x) - 1}}} \\\\ \n"
 	output += cov_prefix
-	output += f"\\frac{{{sum(cov_numerator_products)}}}{{{len(x) - 1}}} \\\\ \n"
+	output += f"\\frac{{{round(sum(cov_numerator_products), 2)}}}{{{len(x) - 1}}} \\\\ \n"
 	output += cov_prefix
 	cov = round(sum(cov_numerator_products) / (len(x) - 1), 2)
 	output += f"{cov} \n"
