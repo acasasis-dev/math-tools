@@ -37,7 +37,8 @@ def covariance(x, y, labels=("x", "y")):
 	output += cov_prefix
 	output += f"\\frac{{{sum(cov_numerator_products)}}}{{{len(x) - 1}}} \\\\ \n"
 	output += cov_prefix
-	output += f"{sum(cov_numerator_products) / (len(x) - 1)} \n"
+	cov = round(sum(cov_numerator_products) / (len(x) - 1), 2)
+	output += f"{cov} \n"
 
 	output += "\\end{gather*}"
 	return output
