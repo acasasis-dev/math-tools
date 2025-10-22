@@ -1,3 +1,5 @@
+from statistics import mean as m
+
 def enclosed_brace(str):
 	return f"{{{str}}}"
 
@@ -16,3 +18,10 @@ def sigma(str=None):
 
 def new_line():
 	return "\\\\ \n"
+
+
+def mean(data):
+	points_mean = m(data)
+	points_stringified = " + ".join(list(map(str, data)))
+	points_len = len(data)
+	return f"{frac(points_stringified, points_len)} = {frac(sum(data), points_len)} = {points_mean}", points_mean
