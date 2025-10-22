@@ -12,3 +12,7 @@ def text(str):
 
 def sigma(str=None):
 	return f"\\sigma_{enclosed_brace(str)}"
+
+
+def new_line():
+	return "\\\\ \n"
