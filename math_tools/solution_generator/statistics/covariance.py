@@ -1,4 +1,5 @@
 from statistics import mean
+from math_tools.tools.latex import frac, text, sigma
 
 new_line = "\\\\ \n"
 
@@ -7,7 +8,7 @@ def points_mean_solution_latex(points, points_label):
 	points_stringified = " + ".join(list(map(str, points)))
 	points_len = len(points)
 	return (
-		f"\t\\sigma_{{\\text{{{points_label}}}}} = \\frac{{{points_stringified}}}{{{points_len}}} = \\frac{{{sum(points)}}}{{{points_len}}} = {points_mean} {new_line}"
+		f"\t{sigma(text(points_label))} = {frac(points_stringified, points_len)} = {frac(sum(points), points_len)} = {points_mean} {new_line}"
 	), points_mean
 
 def covariance(x, y, labels=("x", "y")):
