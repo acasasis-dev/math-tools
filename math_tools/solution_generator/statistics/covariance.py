@@ -1,13 +1,10 @@
-from statistics import mean
-from math_tools.tools.latex import frac, text, sigma, new_line
+from math_tools.tools.latex import frac, text, sigma, new_line, mean
 
 
 def points_mean_solution_latex(points, points_label):
-	points_mean = mean(points)
-	points_stringified = " + ".join(list(map(str, points)))
-	points_len = len(points)
+	points_mean_latex, points_mean = mean(points)
 	return (
-		f"\t{sigma(text(points_label))} = {frac(points_stringified, points_len)} = {frac(sum(points), points_len)} = {points_mean} {new_line()}"
+		f"\t{sigma(text(points_label))} = {points_mean_latex} {new_line()}"
 	), points_mean
 
 def covariance(x, y, labels=("x", "y")):
