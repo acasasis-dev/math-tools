@@ -8,3 +8,7 @@ def frac(numerator, denominator):
 
 def text(str):
 	return f"\\text{enclosed_brace(str)}"
+
+
+def sigma(str=None):
+	return f"\\sigma_{str}"
