@@ -25,7 +25,7 @@ def covariance(x, y, labels=("x", "y")):
 	y_latex, y_mean = points_mean_solution_latex(y, y_label)
 	output += y_latex
 	output += f"\t{new_line()}"
-	cov_prefix = f"\tCov[\\text{{{x_label}}}, \\text{{{y_label}}}] = "
+	cov_prefix = f"\tCov[{text(x_label)}, {text(y_label)}] = "
 	output += cov_prefix
 	cov_numerator = []
 	cov_numerator_products = []
