@@ -11,4 +11,4 @@ def text(str):
 
 
 def sigma(str=None):
-	return f"\\sigma_{str}"
+	return f"\\sigma_{enclosed_brace(str)}"
