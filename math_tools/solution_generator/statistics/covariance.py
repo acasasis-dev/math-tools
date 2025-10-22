@@ -1,7 +1,6 @@
 from statistics import mean
-from math_tools.tools.latex import frac, text, sigma
+from math_tools.tools.latex import frac, text, sigma, new_line
 
-new_line = "\\\\ \n"
 
 def points_mean_solution_latex(points, points_label):
 	points_mean = mean(points)
