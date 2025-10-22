@@ -33,7 +33,7 @@ def covariance(x, y, labels=("x", "y")):
 		cov_numerator.append(f"({round(x[i] - x_mean, 2)})({round(y[i] - y_mean, 2)})")
 		cov_numerator_products.append(round((x[i] - x_mean) * (y[i] - y_mean), 2))
 	
-	output += f"\\frac{{{" + ".join(cov_numerator)}}}{{{len(x)} - 1}} {new_line()}"
+	output += f"{frac(" + ".join(cov_numerator), f'{len(x)} - 1')} {new_line()}"
 	output += cov_prefix
 	output += f"\\frac{{{" + ".join(list(map(str, cov_numerator_products)))}}}{{{len(x) - 1}}} {new_line()}"
 	output += cov_prefix
