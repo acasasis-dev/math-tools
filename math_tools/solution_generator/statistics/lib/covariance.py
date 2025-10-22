@@ -1,11 +1,5 @@
-from math_tools.tools.latex import frac, text, sigma, new_line, mean
+from math_tools.tools.latex import frac, text, new_line, mean
 
-
-def points_mean_solution_latex(points, points_label):
-	points_mean_latex, points_mean = mean(points)
-	return (
-		f"\t{sigma(text(points_label))} = {points_mean_latex} {new_line()}"
-	), points_mean
 
 def covariance(x, y, labels=("x", "y")):
 	output = "\\begin{gather*}\n"
@@ -17,9 +11,9 @@ def covariance(x, y, labels=("x", "y")):
 
 	x_label, y_label = labels
 
-	x_latex, x_mean = points_mean_solution_latex(x, x_label)
+	x_latex, x_mean = mean(x, x_label)
 	output += x_latex
-	y_latex, y_mean = points_mean_solution_latex(y, y_label)
+	y_latex, y_mean = mean(y, y_label)
 	output += y_latex
 	output += f"\t{new_line()}"
 	cov_prefix = f"\tCov[{text(x_label)}, {text(y_label)}] = "
