@@ -20,6 +20,10 @@ def new_line():
 	return "\\\\ \n"
 
 
+def bar(label):
+	return f"\\bar{enclosed_brace("x")}_{text(label)}"
+
+
 def mean(data):
 	points_mean = m(data)
 	points_stringified = " + ".join(list(map(str, data)))
