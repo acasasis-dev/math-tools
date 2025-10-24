@@ -1,4 +1,5 @@
-from math_tools.tools.latex import frac, text, new_line, mean
+from math_tools.tools.latex import frac, text, new_line
+from math_tools.solution_generator import mean
 
 
 def covariance(x, y, labels=("x", "y")):
