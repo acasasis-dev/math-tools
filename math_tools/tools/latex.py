@@ -1,5 +1,3 @@
-from statistics import mean as m
-
 def enclosed_brace(str):
 	return f"{{{str}}}"
 
@@ -22,10 +20,3 @@ def new_line():
 
 def bar(label):
 	return f"\\bar{enclosed_brace("x")}_{text(label)}"
-
-
-def mean(data, label=None, tabs=1):
-	points_mean = m(data)
-	points_stringified = " + ".join(list(map(str, data)))
-	points_len = len(data)
-	return f"{'\t' * tabs}{bar(label)} = {frac(points_stringified, points_len)} = {frac(sum(data), points_len)} = {points_mean} {new_line()}", points_mean
