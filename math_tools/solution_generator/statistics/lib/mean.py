@@ -2,7 +2,7 @@ from statistics import mean as m
 from math_tools.tools.latex import bar, frac, new_line
 
 
-def mean(data, population="full", label=None, tabs=1):
+def mean(data, label=None, population="full", tabs=1):
 	if population not in ["full", "sample"]:
 		raise Exception("Invalid population")
 

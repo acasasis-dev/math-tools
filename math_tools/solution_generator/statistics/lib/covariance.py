@@ -1,8 +1,11 @@
 from math_tools.tools.latex import frac, text, new_line
-from math_tools.solution_generator import mean
+from importlib import import_module
 
 
 def covariance(x, y, labels=("x", "y")):
+	statistics_cls = import_module("math_tools.solution_generator.statistics")
+	mean = getattr(statistics_cls, "mean")
+	
 	output = "\\begin{gather*}\n"
 	if len(x) != len(y):
 		raise Exception(f"length of x must be the same as y. {len(x)} != {len(y)}")
