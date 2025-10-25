@@ -24,3 +24,7 @@ def bar(label):
 
 def mu(label):
 	return f"\\mu_{text(label)}"
+
+
+def x_bar(label):
+	return f"\\bar{enclosed_brace("x")}_{text(label)}"
