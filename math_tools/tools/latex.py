@@ -20,3 +20,7 @@ def new_line():
 
 def bar(label):
 	return f"\\bar{enclosed_brace("x")}_{text(label)}"
+
+
+def mu(label):
+	return f"\\mu_{text(label)}"
