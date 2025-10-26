@@ -1,9 +1,10 @@
 from math_tools.tools.latex import frac, text, new_line
 from .mean import mean
 
+from statistics import mean as m
 
-def covariance(x, y, labels=("x", "y")):
-	output = "\\begin{gather*}\n"
+
+def covariance(x, y, labels=("x", "y"), environment=True):
 	if len(x) != len(y):
 		raise Exception(f"length of x must be the same as y. {len(x)} != {len(y)}")
 	
@@ -12,9 +13,11 @@ def covariance(x, y, labels=("x", "y")):
 
 	x_label, y_label = labels
 
-	x_latex, x_mean = mean(x, x_label)
-	output += x_latex
-	y_latex, y_mean = mean(y, y_label)
+	x_latex = mean(x, x_label, environment=False)
+	x_mean = m(x)
+	output = x_latex
+	y_latex = mean(y, y_label, environment=False)
+	y_mean = m(y)
 	output += y_latex
 	output += f"\t{new_line()}"
 	cov_prefix = f"\tCov[{text(x_label)}, {text(y_label)}] = "
@@ -33,5 +36,12 @@ def covariance(x, y, labels=("x", "y")):
 	]
 
 	output += f"{cov_prefix}".join(cov_solving_steps)
-	output += "\\end{gather*}"
+
+	if environment:
+		output = (
+			"\\begin{gather*}\n"
+			f"{output}"
+			"\\end{gather*}"
+		)
+
 	return output
