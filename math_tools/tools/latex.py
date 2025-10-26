@@ -28,3 +28,8 @@ def mu(label):
 
 def x_bar(label):
 	return f"{bar(enclosed_brace("x"))}_{text(label)}" if label else f"{bar(enclosed_brace("x"))}"
+
+
+def get_sd_symbol(population, label):
+	prefix = f"{sigma() if population == "full" else f"s"}^2"
+	return f"{prefix}{"_" + text(label) if label else ""} = "
