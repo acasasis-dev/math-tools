@@ -19,12 +19,12 @@ def new_line():
 
 
 def bar(label):
-	return f"\\bar{enclosed_brace("x")}_{text(label)}"
+	return f"\\bar{enclosed_brace(label)}"
 
 
 def mu(label):
-	return f"\\mu_{text(label)}"
+	return f"\\mu_{text(label)}" if label else f"\\mu"
 
 
 def x_bar(label):
-	return f"\\bar{enclosed_brace("x")}_{text(label)}"
+	return f"{bar(enclosed_brace("x"))}_{text(label)}" if label else f"{bar(enclosed_brace("x"))}"
