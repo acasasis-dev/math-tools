@@ -10,8 +10,8 @@ def text(str):
 	return f"\\text{enclosed_brace(str)}"
 
 
-def sigma(str=None):
-	return f"\\sigma_{enclosed_brace(str)}"
+def sigma(label=None):
+	return f"\\sigma_{enclosed_brace(text(str))}" if label else f"\\sigma"
 
 
 def new_line():
