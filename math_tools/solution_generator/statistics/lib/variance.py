@@ -19,12 +19,19 @@ def variance(data, label=None, population="full", tabs=1):
 
 	output += (
 		f"{"\t" * tabs}{prefix} "
-		f"{
-			frac(
-				" + ".join(numerator_first_step),
-				data_len if population == "full" else f"{data_len} - 1"
-			)
-		} "
+		f"{frac(
+			" + ".join(numerator_first_step),
+			data_len if population == "full" else f"{data_len} - 1"
+			
+		)} "
+		f"{new_line()}"
+	)
+	output += (
+		f"{"\t" * tabs}{prefix} "
+		f"{frac(
+			" + ".join(numerator_second_step),
+			data_len if population == "full" else f"{data_len - 1}"
+		)} "
 		f"{new_line()}"
 	)
 	output += "\\end{gather*}"
