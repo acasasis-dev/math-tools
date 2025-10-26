@@ -3,13 +3,13 @@ from .lib.mean import mean as m
 from .lib.variance import variance as v
 
 
-def covariance(*args):
-	return cov(*args)
+def covariance(*args, **kwargs):
+	return cov(*args, **kwargs)
 
 
-def mean(*args):
-	return m(*args)
+def mean(*args, **kwargs):
+	return m(*args, **kwargs)
 
 
-def variance(*args):
-	return v(*args)
+def variance(*args, **kwargs):
+	return v(*args, **kwargs)
