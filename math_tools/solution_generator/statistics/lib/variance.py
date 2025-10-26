@@ -24,6 +24,18 @@ def variance(data, label=None, population="full", tabs=1):
 		list(map(str, squared_deviations)),
 		sum(squared_deviations)
 	]
+	for i in range(len(steps)):
+		curr = f"{"\t" * tabs}{prefix} "
+		if i == len(steps) - 1:
+			curr += f"{round(sum(squared_deviations) / denominator, 2)}"
+		else:
+			curr += (
+				f"{frac(
+					" + ".join(steps[i]),
+					denominator
+				)} {new_line()}"
+			)
+		output += curr
 
 	output += "\n"
 	output += "\\end{gather*}"
