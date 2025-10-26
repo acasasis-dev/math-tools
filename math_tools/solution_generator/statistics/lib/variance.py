@@ -7,7 +7,8 @@ def variance(data, label=None, population="full", tabs=1):
 	output = "\\begin{gather*}\n"
 	_mean_latex, _mean = mean(**kwargs)
 	output += _mean_latex + f"\t{new_line()}"
-	prefix = f"{sigma(label) if population == "full" else f"s^2_{text(label)}"} = "
+	prefix = f"{sigma() if population == "full" else f"s^2"}"
+	prefix = f"{prefix}{"_" + text(label) if label else ""} = "
 	data_len = len(data)
 	denominator = data_len if population == "full" else data_len - 1
 	numerator_first_step = []
@@ -22,22 +23,21 @@ def variance(data, label=None, population="full", tabs=1):
 		numerator_first_step,
 		numerator_second_step,
 		list(map(str, squared_deviations)),
-		sum(squared_deviations)
+		[str(sum(squared_deviations))],
+		str(round(sum(squared_deviations) / denominator, 2))
 	]
 	for i in range(len(steps)):
-		curr = f"{"\t" * tabs}{prefix} "
+		output += f"{"\t" * tabs}{prefix} "
 		if i == len(steps) - 1:
-			curr += f"{round(sum(squared_deviations) / denominator, 2)}"
+			output += f"{steps[i]} \n"
 		else:
-			curr += (
+			output += (
 				f"{frac(
 					" + ".join(steps[i]),
 					denominator
 				)} {new_line()}"
 			)
-		output += curr
 
-	output += "\n"
 	output += "\\end{gather*}"
 
 	return output
