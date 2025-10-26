@@ -1,6 +1,6 @@
 from .mean import mean
 from statistics import mean as m
-from math_tools.tools.latex import new_line, frac, get_variance_symbol
+from math_tools.tools.latex import new_line, frac, get_sd_symbol
 
 
 def variance(data, label=None, population="full", tabs=1, environment=True):
@@ -9,7 +9,7 @@ def variance(data, label=None, population="full", tabs=1, environment=True):
 	_mean_latex = mean(**kwargs, environment=False)
 	_mean = round(m(data), 2)
 	output = _mean_latex + f"\t{new_line()}"
-	prefix = get_variance_symbol(population, label)
+	prefix = get_sd_symbol(population, label, variance=True)
 	data_len = len(data)
 	denominator = data_len if population == "full" else data_len - 1
 	numerator_first_step = []
