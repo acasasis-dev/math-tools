@@ -1,12 +1,14 @@
 from .mean import mean
+from statistics import mean as m
 from math_tools.tools.latex import new_line, sigma, frac, text
 
 
-def variance(data, label=None, population="full", tabs=1):
+def variance(data, label=None, population="full", tabs=1, environment=True):
 	kwargs = locals()
-	output = "\\begin{gather*}\n"
-	_mean_latex, _mean = mean(**kwargs)
-	output += _mean_latex + f"\t{new_line()}"
+	kwargs.pop("environment")
+	_mean_latex = mean(**kwargs, environment=False)
+	_mean = round(m(data), 2)
+	output = _mean_latex + f"\t{new_line()}"
 	prefix = f"{sigma() if population == "full" else f"s^2"}"
 	prefix = f"{prefix}{"_" + text(label) if label else ""} = "
 	data_len = len(data)
@@ -38,6 +40,11 @@ def variance(data, label=None, population="full", tabs=1):
 				)} {new_line()}"
 			)
 
-	output += "\\end{gather*}"
+	if environment:
+		output = (
+			"\\begin{gather*}\n"
+			f"{output}"
+			"\\end{gather*}"
+		)
 
 	return output
