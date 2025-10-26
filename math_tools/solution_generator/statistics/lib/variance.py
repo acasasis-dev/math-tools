@@ -1,13 +1,14 @@
 from .mean import mean
-from math_tools.tools.latex import new_line, sigma
+from math_tools.tools.latex import new_line, sigma, frac
 
 
 def variance(data, label=None, population="full", tabs=1):
 	kwargs = locals()
 	output = "\\begin{gather*}\n"
 	_mean_latex, _mean = mean(**kwargs)
-	output += _mean_latex
+	output += _mean_latex + f"\t{new_line()}"
 	prefix = f"{sigma() if population == "full" else "s^2"} = "
+	data_len = len(data)
 	numerator_first_step = []
 	numerator_second_step = []
 	squared_deviations = []
@@ -16,6 +17,16 @@ def variance(data, label=None, population="full", tabs=1):
 		numerator_second_step.append(f"({round(num - _mean, 2)})^2")
 		squared_deviations.append(round((num - _mean)**2, 2))
 
+	output += (
+		f"{"\t" * tabs}{prefix} "
+		f"{
+			frac(
+				" + ".join(numerator_first_step),
+				data_len if population == "full" else f"{data_len} - 1"
+			)
+		} "
+		f"{new_line()}"
+	)
 	output += "\\end{gather*}"
 
 	return output
