@@ -9,7 +9,7 @@ def variance(data, label=None, population="full", tabs=1, environment=True):
 	_mean_latex = mean(**kwargs, environment=False)
 	_mean = round(m(data), 2)
 	output = _mean_latex + f"\t{new_line()}"
-	prefix = f"{sigma() if population == "full" else f"s^2"}"
+	prefix = f"{sigma() if population == "full" else f"s"}^2"
 	prefix = f"{prefix}{"_" + text(label) if label else ""} = "
 	data_len = len(data)
 	denominator = data_len if population == "full" else data_len - 1
