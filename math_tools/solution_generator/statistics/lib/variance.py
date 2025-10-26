@@ -18,6 +18,13 @@ def variance(data, label=None, population="full", tabs=1):
 		numerator_second_step.append(f"({round(num - _mean, 2)})^2")
 		squared_deviations.append(round((num - _mean)**2, 2))
 
+	steps = [
+		numerator_first_step,
+		numerator_second_step,
+		list(map(str, squared_deviations)),
+		sum(squared_deviations)
+	]
+
 	output += "\n"
 	output += "\\end{gather*}"
 
