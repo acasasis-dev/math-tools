@@ -9,6 +9,7 @@ def variance(data, label=None, population="full", tabs=1):
 	output += _mean_latex + f"\t{new_line()}"
 	prefix = f"{sigma(label) if population == "full" else f"s^2_{text(label)}"} = "
 	data_len = len(data)
+	denominator = data_len if population == "full" else data_len - 1
 	numerator_first_step = []
 	numerator_second_step = []
 	squared_deviations = []
@@ -17,23 +18,7 @@ def variance(data, label=None, population="full", tabs=1):
 		numerator_second_step.append(f"({round(num - _mean, 2)})^2")
 		squared_deviations.append(round((num - _mean)**2, 2))
 
-	output += (
-		f"{"\t" * tabs}{prefix} "
-		f"{frac(
-			" + ".join(numerator_first_step),
-			data_len if population == "full" else f"{data_len} - 1"
-			
-		)} "
-		f"{new_line()}"
-	)
-	output += (
-		f"{"\t" * tabs}{prefix} "
-		f"{frac(
-			" + ".join(numerator_second_step),
-			data_len if population == "full" else f"{data_len - 1}"
-		)} "
-		f"{new_line()}"
-	)
+	output += "\n"
 	output += "\\end{gather*}"
 
 	return output
