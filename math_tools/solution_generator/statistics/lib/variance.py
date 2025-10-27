@@ -20,12 +20,14 @@ def variance(data, label=None, population="full", tabs=1, environment=True):
 		numerator_second_step.append(f"({round(num - _mean, 2)})^2")
 		squared_deviations.append(round((num - _mean)**2, 2))
 
+	squared_deviations_sum = round(sum(squared_deviations), 2)
+	_variance = round(squared_deviations_sum / denominator, 2)
 	steps = [
 		numerator_first_step,
 		numerator_second_step,
 		list(map(str, squared_deviations)),
-		[str(round(sum(squared_deviations), 2))],
-		str(round(sum(squared_deviations) / denominator, 2))
+		[str(squared_deviations_sum)],
+		str(_variance)
 	]
 	for i in range(len(steps)):
 		output += f"{"\t" * tabs}{prefix} "
