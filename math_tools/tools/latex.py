@@ -33,3 +33,7 @@ def x_bar(label):
 def get_sd_symbol(population, label, variance=False):
 	prefix = f"{sigma() if population == "full" else f"s"}{"^2" if variance else ""}"
 	return f"{prefix}{"_" + text(label) if label else ""} = "
+
+
+def sqrt(num):
+	return f"\\sqrt{enclosed_brace(num)}"
