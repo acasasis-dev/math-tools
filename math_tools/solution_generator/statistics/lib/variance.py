@@ -24,7 +24,7 @@ def variance(data, label=None, population="full", tabs=1, environment=True):
 		numerator_first_step,
 		numerator_second_step,
 		list(map(str, squared_deviations)),
-		[str(sum(squared_deviations))],
+		[str(round(sum(squared_deviations), 2))],
 		str(round(sum(squared_deviations) / denominator, 2))
 	]
 	for i in range(len(steps)):
