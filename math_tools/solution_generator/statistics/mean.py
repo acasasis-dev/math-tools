@@ -1,16 +1,9 @@
 from statistics import mean as m
 from math_tools.tools.latex import frac, new_line, mu, x_bar
-from math_tools.common.equation import Equation
+from .lib import StatisticsEquation
 
 
-class Mean(Equation):
-	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
-		self.data = data
-		self.label = label
-		self.population = population
-		self.tabs = tabs
-		self.environment = environment
-
+class Mean(StatisticsEquation):
 	@property
 	def latex(self):
 		if self.population not in ["full", "sample"]:
