@@ -1,0 +1,30 @@
+from .variance import Variance
+from math_tools.tools.latex import get_sd_symbol, sqrt, new_line
+from .lib import StatisticsEquation
+from math import sqrt as s
+
+
+class StandardDeviation(StatisticsEquation):
+	@property
+	def latex(self):
+		_variance_obj = Variance(
+			self.data,
+			self.label,
+			self.population,
+			self.tabs,
+			environment=False
+		)
+		_variance_latex = _variance_obj.latex
+		_variance = _variance_obj.result
+		output = _variance_latex + new_line()
+		prefix = get_sd_symbol(self.population, self.label)
+		output += f"{"\t" * self.tabs}{prefix} {sqrt(round(_variance, 2))} {new_line()}"
+		output += f"{"\t" * self.tabs}{prefix} {round(s(round(_variance, 2)), 2)} {new_line()}"
+		
+		if self.environment:
+			output = (
+				"\\begin{gather*}\n"
+				f"{output}"
+				"\\end{gather*}"
+			)
+		return output
