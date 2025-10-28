@@ -19,7 +19,7 @@ def new_line():
 
 
 def bar(label):
-	return f"\\bar{enclosed_brace(label)}"
+	return f"\\bar{enclosed_brace(text(label))}"
 
 
 def mu(label):
@@ -27,7 +27,7 @@ def mu(label):
 
 
 def x_bar(label):
-	return f"{bar(enclosed_brace("x"))}_{text(label)}" if label else f"{bar(enclosed_brace("x"))}"
+	return f"{bar("x")}_{text(label)}" if label else f"{bar("x")}"
 
 
 def get_sd_symbol(population, label, variance=False):
