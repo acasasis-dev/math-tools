@@ -14,6 +14,7 @@ class Variance(Mean):
 		_mean_obj = super()
 		self._mean_latex = _mean_obj.latex
 		self._mean = _mean_obj.result
+		self.data_len = len(self.data)
 
 	@property
 	def result(self):
@@ -23,8 +24,7 @@ class Variance(Mean):
 	def latex(self):
 		output = self._mean_latex + f"\t{new_line()}"
 		prefix = get_sd_symbol(self.population, self.label, variance=True)
-		data_len = len(self.data)
-		denominator = data_len if self.population == "full" else data_len - 1
+		denominator = self.data_len if self.population == "full" else self.data_len - 1
 		numerator_first_step = []
 		numerator_second_step = []
 		squared_deviations = []
