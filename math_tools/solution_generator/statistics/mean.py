@@ -5,12 +5,15 @@ from .lib import StatisticsEquation
 
 class Mean(StatisticsEquation):
 	@property
+	def result(self):
+		return round(m(self.data), 2)
+
+	@property
 	def latex(self):
 		if self.population not in ["full", "sample"]:
 			raise Exception("Invalid population")
 
-		points_mean = round(m(self.data), 2)
-		self.result = points_mean
+		points_mean = self.result
 		points_stringified = " + ".join(list(map(str, self.data)))
 		points_len = len(self.data)
 		prefix = mu(self.label) if self.population == "full" else x_bar(self.label)
