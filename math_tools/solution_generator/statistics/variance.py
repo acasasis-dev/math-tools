@@ -11,7 +11,9 @@ class Variance(Mean):
 		self.init_equation()
 	
 	def init_equation(self):
-		pass
+		_mean_obj = super()
+		self._mean_latex = _mean_obj.latex
+		self._mean = _mean_obj.result
 
 	@property
 	def result(self):
@@ -19,16 +21,7 @@ class Variance(Mean):
 
 	@property
 	def latex(self):
-		_mean_obj = Mean(
-			self.data,
-			self.label,
-			self.population,
-			self.tabs,
-			environment=False
-		)
-		_mean_latex = _mean_obj.latex
-		_mean = _mean_obj.result
-		output = _mean_latex + f"\t{new_line()}"
+		output = self._mean_latex + f"\t{new_line()}"
 		prefix = get_sd_symbol(self.population, self.label, variance=True)
 		data_len = len(self.data)
 		denominator = data_len if self.population == "full" else data_len - 1
@@ -36,9 +29,9 @@ class Variance(Mean):
 		numerator_second_step = []
 		squared_deviations = []
 		for num in self.data:
-			numerator_first_step.append(f"({num} - {_mean})^2")
-			numerator_second_step.append(f"({round(num - _mean, 2)})^2")
-			squared_deviations.append(round((num - _mean)**2, 2))
+			numerator_first_step.append(f"({num} - {self._mean})^2")
+			numerator_second_step.append(f"({round(num - self._mean, 2)})^2")
+			squared_deviations.append(round((num - self._mean)**2, 2))
 
 		squared_deviations_sum = round(sum(squared_deviations), 2)
 		_variance = round(squared_deviations_sum / denominator, 2)
