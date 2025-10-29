@@ -8,6 +8,10 @@ class Variance(Mean):
 	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
 		super().__init__(data, label, population, tabs, False)
 		self.environment = environment
+		self.init_equation()
+	
+	def init_equation(self):
+		pass
 
 	@property
 	def result(self):
