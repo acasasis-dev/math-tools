@@ -16,6 +16,9 @@ class Variance(Mean):
 		self._mean = _mean_obj.result
 		self.data_len = len(self.data)
 		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
+		self.squared_deviations = list(map(lambda num: round((num - self._mean)**2, 2), self.data))
+		self.squared_deviations_sum = round((sum(self.squared_deviations)), 2)
+		return round(self.squared_deviations_sum / self.denominator, 2)
 
 	@property
 	def result(self):
@@ -27,19 +30,16 @@ class Variance(Mean):
 		prefix = get_sd_symbol(self.population, self.label, variance=True)
 		numerator_first_step = []
 		numerator_second_step = []
-		squared_deviations = []
 		for num in self.data:
 			numerator_first_step.append(f"({num} - {self._mean})^2")
 			numerator_second_step.append(f"({round(num - self._mean, 2)})^2")
-			squared_deviations.append(round((num - self._mean)**2, 2))
 
-		squared_deviations_sum = round(sum(squared_deviations), 2)
-		_variance = round(squared_deviations_sum / self.denominator, 2)
+		_variance = round(self.squared_deviations_sum / self.denominator, 2)
 		steps = [
 			numerator_first_step,
 			numerator_second_step,
-			list(map(str, squared_deviations)),
-			[str(squared_deviations_sum)],
+			list(map(str, self.squared_deviations)),
+			[str(self.squared_deviations_sum)],
 			str(_variance)
 		]
 		for i in range(len(steps)):
