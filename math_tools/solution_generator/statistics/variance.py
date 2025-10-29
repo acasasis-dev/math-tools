@@ -1,9 +1,14 @@
 from .mean import Mean
 from math_tools.tools.latex import new_line, frac, get_sd_symbol
 from .lib import StatisticsEquation
+from .mean import Mean
 
 
-class Variance(StatisticsEquation):
+class Variance(Mean):
+	@property
+	def result(self):
+		return
+
 	@property
 	def latex(self):
 		_mean_obj = Mean(
@@ -29,7 +34,6 @@ class Variance(StatisticsEquation):
 
 		squared_deviations_sum = round(sum(squared_deviations), 2)
 		_variance = round(squared_deviations_sum / denominator, 2)
-		self.result = _variance
 		steps = [
 			numerator_first_step,
 			numerator_second_step,
