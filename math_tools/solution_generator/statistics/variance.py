@@ -15,6 +15,7 @@ class Variance(Mean):
 		self._mean_latex = _mean_obj.latex
 		self._mean = _mean_obj.result
 		self.data_len = len(self.data)
+		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
 
 	@property
 	def result(self):
@@ -24,7 +25,6 @@ class Variance(Mean):
 	def latex(self):
 		output = self._mean_latex + f"\t{new_line()}"
 		prefix = get_sd_symbol(self.population, self.label, variance=True)
-		denominator = self.data_len if self.population == "full" else self.data_len - 1
 		numerator_first_step = []
 		numerator_second_step = []
 		squared_deviations = []
@@ -34,7 +34,7 @@ class Variance(Mean):
 			squared_deviations.append(round((num - self._mean)**2, 2))
 
 		squared_deviations_sum = round(sum(squared_deviations), 2)
-		_variance = round(squared_deviations_sum / denominator, 2)
+		_variance = round(squared_deviations_sum / self.denominator, 2)
 		steps = [
 			numerator_first_step,
 			numerator_second_step,
@@ -50,7 +50,7 @@ class Variance(Mean):
 				output += (
 					f"{frac(
 						" + ".join(steps[i]),
-						denominator
+						self.denominator
 					)} {new_line()}"
 				)
 
