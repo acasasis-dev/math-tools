@@ -29,7 +29,10 @@ class Covariance(StatisticsEquation):
 
 	@property
 	def result(self):
-		return None
+		cov_numerator_products = []
+		for i in range(len(self.x)):
+			cov_numerator_products.append(round((self.x[i] - self.x_mean) * (self.y[i] - self.y_mean), 2))
+		return round(sum(cov_numerator_products) / self.denominator, 2)
 
 	@property
 	def latex(self):
@@ -42,13 +45,12 @@ class Covariance(StatisticsEquation):
 		cov_numerator_products = []
 		for i in range(len(self.x)):
 			cov_numerator.append(f"({round(self.x[i] - self.x_mean, 2)})({round(self.y[i] - self.y_mean, 2)})")
-			cov_numerator_products.append(round((self.x[i] - self.x_mean) * (self.y[i] - self.y_mean), 2))
 		
 		cov_solving_steps = [
 			f"{frac(" + ".join(cov_numerator), self.denominator)} {new_line()}",
 			f"{frac(" + ".join(list(map(str, cov_numerator_products))), self.denominator)} {new_line()}",
 			f"{frac(round(sum(cov_numerator_products), 2), self.denominator)} {new_line()}",
-			f"{round(sum(cov_numerator_products) / self.denominator, 2)} \n"
+			f"{self.result} \n"
 		]
 
 		output += f"{cov_prefix}".join(cov_solving_steps)
