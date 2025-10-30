@@ -1,21 +1,27 @@
 from math_tools.tools.latex import frac, text, new_line
-from .lib import Equation
+from .lib import StatisticsEquation
 from .mean import Mean
 
 
-class Covariance(Equation):
-	def __init__(self, x, y, labels=("x", "y"), environment=True):
-		self.x = x
-		self.y = y
-		self.labels = labels
-		self.environment = environment
+class Covariance(StatisticsEquation):
+	def __init__(self, data, label=("x", "y"), population="full", tabs=1, environment=True):
+		super().__init__(data, label, population, tabs, environment)
+		if len(self.data) != 2:
+			raise Exception(f"length of data must exactly be 2")
+		
+		self.x, self.y = data
+		if len(self.x) != len(self.y):
+			raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
+		
+		if len(self.label) != 2:
+			raise Exception(f"length of labels must exactly be 2")
+		
+		self.x_label, self.y_label = self.label
 
-		x_label, y_label = self.labels
-
-		x_mean_obj = Mean(self.x, x_label, environment=False)
+		x_mean_obj = Mean(self.x, self.x_label, environment=False)
 		self.x_latex = x_mean_obj.latex
 		self.x_mean = x_mean_obj.result
-		y_mean_obj = Mean(self.y, y_label, environment=False)
+		y_mean_obj = Mean(self.y, self.y_label, environment=False)
 		self.y_latex = y_mean_obj.latex
 		self.y_mean = y_mean_obj.result
 
@@ -25,12 +31,6 @@ class Covariance(Equation):
 
 	@property
 	def latex(self):
-		if len(self.x) != len(self.y):
-			raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
-		
-		if len(self.labels) != 2:
-			raise Exception(f"length of labels must exactly be 2")
-
 		output = self.x_latex
 		output += self.y_latex
 		output += f"\t{new_line()}"
