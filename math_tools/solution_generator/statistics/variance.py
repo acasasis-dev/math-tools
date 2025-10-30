@@ -11,12 +11,12 @@ class Variance(Mean):
 	
 	def init_equation(self):
 		_mean_obj = super()
-		self._mean_latex = _mean_obj.latex
 		self._mean = _mean_obj.result
 		self.data_len = len(self.data)
 		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
 		self.squared_deviations = list(map(lambda num: round((num - self._mean)**2, 2), self.data))
 		self.squared_deviations_sum = round((sum(self.squared_deviations)), 2)
+		self._mean_latex = _mean_obj.latex
 
 	@property
 	def result(self):
