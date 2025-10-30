@@ -19,8 +19,6 @@ class Variance(Mean):
 		self.squared_deviations = list(map(lambda num: round((num - self._mean)**2, 2), self.data))
 		self.squared_deviations_sum = round((sum(self.squared_deviations)), 2)
 
-		return round(self.squared_deviations_sum / self.denominator, 2)
-
 	@property
 	def result(self):
 		return round(self.squared_deviations_sum / self.denominator, 2)
