@@ -1,10 +1,15 @@
 from .variance import Variance
 from math_tools.tools.latex import get_sd_symbol, sqrt, new_line
 from .lib import StatisticsEquation
+from .variance import Variance
 from math import sqrt as s
 
 
-class StandardDeviation(StatisticsEquation):
+class StandardDeviation(Variance):
+	@property
+	def result(self):
+		pass
+
 	@property
 	def latex(self):
 		_variance_obj = Variance(
