@@ -11,6 +11,10 @@ class Covariance(Equation):
 		self.environment = environment
 
 	@property
+	def result(self):
+		return None
+
+	@property
 	def latex(self):
 		if len(self.x) != len(self.y):
 			raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
