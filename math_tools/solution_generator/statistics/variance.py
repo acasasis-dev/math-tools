@@ -1,6 +1,5 @@
 from .mean import Mean
 from math_tools.tools.latex import new_line, frac, get_sd_symbol
-from .lib import StatisticsEquation
 from .mean import Mean
 
 
