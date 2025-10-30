@@ -7,9 +7,6 @@ class Variance(Mean):
 	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
 		super().__init__(data, label, population, tabs, False)
 		self.environment = environment
-		self.init_equation()
-	
-	def init_equation(self):
 		_mean_obj = super()
 		self._mean = _mean_obj.result
 		self.data_len = len(self.data)
