@@ -5,24 +5,29 @@ from .variance import Variance
 from math import sqrt as s
 
 
-class StandardDeviation(Variance):
+class StandardDeviation(StatisticsEquation):
 	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
-		self._variance_obj = super().__init__(data, label, population, tabs, False)
-		self.environment = environment
-		_variance_obj = super()
+		super().__init__(data, label, population, tabs, False)
+		_variance_obj = Variance(
+			self.data,
+			self.label,
+			self.population,
+			self.tabs,
+			False
+		)
 		self._variance_latex = _variance_obj.latex
 		self._variance = _variance_obj.result
 
 	@property
 	def result(self):
-		pass
+		return round(s(round(self._variance, 2)), 2)
 
 	@property
 	def latex(self):
 		output = self._variance_latex + new_line()
 		prefix = get_sd_symbol(self.population, self.label)
 		output += f"{"\t" * self.tabs}{prefix} {sqrt(round(self._variance, 2))} {new_line()}"
-		output += f"{"\t" * self.tabs}{prefix} {round(s(round(self._variance, 2)), 2)} {new_line()}"
+		output += f"{"\t" * self.tabs}{prefix} {self.result} {new_line()}"
 		
 		if self.environment:
 			output = (
