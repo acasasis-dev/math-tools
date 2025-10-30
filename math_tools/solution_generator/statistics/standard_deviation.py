@@ -7,12 +7,11 @@ from math import sqrt as s
 
 class StandardDeviation(Variance):
 	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
-		super().__init__(data, label, population, tabs, False)
+		self._variance_obj = super().__init__(data, label, population, tabs, False)
 		self.environment = environment
-		self.init_equation()
-
-	def init_equation(self):
-		pass
+		_variance_obj = super()
+		self._variance_latex = _variance_obj.latex
+		self._variance = _variance_obj.result
 
 	@property
 	def result(self):
@@ -20,19 +19,10 @@ class StandardDeviation(Variance):
 
 	@property
 	def latex(self):
-		_variance_obj = Variance(
-			self.data,
-			self.label,
-			self.population,
-			self.tabs,
-			environment=False
-		)
-		_variance_latex = _variance_obj.latex
-		_variance = _variance_obj.result
-		output = _variance_latex + new_line()
+		output = self._variance_latex + new_line()
 		prefix = get_sd_symbol(self.population, self.label)
-		output += f"{"\t" * self.tabs}{prefix} {sqrt(round(_variance, 2))} {new_line()}"
-		output += f"{"\t" * self.tabs}{prefix} {round(s(round(_variance, 2)), 2)} {new_line()}"
+		output += f"{"\t" * self.tabs}{prefix} {sqrt(round(self._variance, 2))} {new_line()}"
+		output += f"{"\t" * self.tabs}{prefix} {round(s(round(self._variance, 2)), 2)} {new_line()}"
 		
 		if self.environment:
 			output = (
