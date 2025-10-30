@@ -10,6 +10,15 @@ class Covariance(Equation):
 		self.labels = labels
 		self.environment = environment
 
+		x_label, y_label = self.labels
+
+		x_mean_obj = Mean(self.x, x_label, environment=False)
+		self.x_latex = x_mean_obj.latex
+		self.x_mean = x_mean_obj.result
+		y_mean_obj = Mean(self.y, y_label, environment=False)
+		self.y_latex = y_mean_obj.latex
+		self.y_mean = y_mean_obj.result
+
 	@property
 	def result(self):
 		return None
@@ -22,24 +31,16 @@ class Covariance(Equation):
 		if len(self.labels) != 2:
 			raise Exception(f"length of labels must exactly be 2")
 
-		x_label, y_label = self.labels
-
-		x_mean_obj = Mean(self.x, x_label, environment=False)
-		x_latex = x_mean_obj.latex
-		x_mean = x_mean_obj.result
-		output = x_latex
-		y_mean_obj = Mean(self.y, y_label, environment=False)
-		y_latex = y_mean_obj.latex
-		y_mean = y_mean_obj.result
-		output += y_latex
+		output = self.x_latex
+		output += self.y_latex
 		output += f"\t{new_line()}"
-		cov_prefix = f"\tCov[{text(x_label)}, {text(y_label)}] = "
+		cov_prefix = f"\tCov[{text(self.x_label)}, {text(self.y_label)}] = "
 		output += cov_prefix
 		cov_numerator = []
 		cov_numerator_products = []
 		for i in range(len(self.x)):
-			cov_numerator.append(f"({round(self.x[i] - x_mean, 2)})({round(self.y[i] - y_mean, 2)})")
-			cov_numerator_products.append(round((self.x[i] - x_mean) * (self.y[i] - y_mean), 2))
+			cov_numerator.append(f"({round(self.x[i] - self.x_mean, 2)})({round(self.y[i] - self.y_mean, 2)})")
+			cov_numerator_products.append(round((self.x[i] - self.x_mean) * (self.y[i] - self.y_mean), 2))
 		
 		cov_solving_steps = [
 			f"{frac(" + ".join(cov_numerator), f'{len(self.x)} - 1')} {new_line()}",
