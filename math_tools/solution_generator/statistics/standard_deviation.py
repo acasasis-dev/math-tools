@@ -7,7 +7,7 @@ from math import sqrt as s
 
 class StandardDeviation(StatisticsEquation):
 	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
-		super().__init__(data, label, population, tabs, False)
+		super().__init__(data, label, population, tabs, environment)
 		_variance_obj = Variance(
 			self.data,
 			self.label,
