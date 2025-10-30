@@ -26,13 +26,14 @@ class Covariance(StatisticsEquation):
 		self.y_mean = y_mean_obj.result
 		self.data_len = len(self.x)
 		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
+		self.cov_numerator_products = []
+		for i in range(len(self.x)):
+			self.cov_numerator_products.append(round((self.x[i] - self.x_mean) * (self.y[i] - self.y_mean), 2))
 
 	@property
 	def result(self):
-		cov_numerator_products = []
-		for i in range(len(self.x)):
-			cov_numerator_products.append(round((self.x[i] - self.x_mean) * (self.y[i] - self.y_mean), 2))
-		return round(sum(cov_numerator_products) / self.denominator, 2)
+		
+		return round(sum(self.cov_numerator_products) / self.denominator, 2)
 
 	@property
 	def latex(self):
@@ -42,14 +43,13 @@ class Covariance(StatisticsEquation):
 		cov_prefix = f"\tCov[{text(self.x_label)}, {text(self.y_label)}] = "
 		output += cov_prefix
 		cov_numerator = []
-		cov_numerator_products = []
 		for i in range(len(self.x)):
 			cov_numerator.append(f"({round(self.x[i] - self.x_mean, 2)})({round(self.y[i] - self.y_mean, 2)})")
 		
 		cov_solving_steps = [
 			f"{frac(" + ".join(cov_numerator), self.denominator)} {new_line()}",
-			f"{frac(" + ".join(list(map(str, cov_numerator_products))), self.denominator)} {new_line()}",
-			f"{frac(round(sum(cov_numerator_products), 2), self.denominator)} {new_line()}",
+			f"{frac(" + ".join(list(map(str, self.cov_numerator_products))), self.denominator)} {new_line()}",
+			f"{frac(round(sum(self.cov_numerator_products), 2), self.denominator)} {new_line()}",
 			f"{self.result} \n"
 		]
 
