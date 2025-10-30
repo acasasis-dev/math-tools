@@ -18,11 +18,12 @@ class Variance(Mean):
 		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
 		self.squared_deviations = list(map(lambda num: round((num - self._mean)**2, 2), self.data))
 		self.squared_deviations_sum = round((sum(self.squared_deviations)), 2)
+
 		return round(self.squared_deviations_sum / self.denominator, 2)
 
 	@property
 	def result(self):
-		return
+		return round(self.squared_deviations_sum / self.denominator, 2)
 
 	@property
 	def latex(self):
@@ -34,13 +35,12 @@ class Variance(Mean):
 			numerator_first_step.append(f"({num} - {self._mean})^2")
 			numerator_second_step.append(f"({round(num - self._mean, 2)})^2")
 
-		_variance = round(self.squared_deviations_sum / self.denominator, 2)
 		steps = [
 			numerator_first_step,
 			numerator_second_step,
 			list(map(str, self.squared_deviations)),
 			[str(self.squared_deviations_sum)],
-			str(_variance)
+			str(self.result)
 		]
 		for i in range(len(steps)):
 			output += f"{"\t" * self.tabs}{prefix} "
