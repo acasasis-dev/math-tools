@@ -24,6 +24,8 @@ class Covariance(StatisticsEquation):
 		y_mean_obj = Mean(self.y, self.y_label, environment=False)
 		self.y_latex = y_mean_obj.latex
 		self.y_mean = y_mean_obj.result
+		self.data_len = len(self.x)
+		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
 
 	@property
 	def result(self):
@@ -43,10 +45,10 @@ class Covariance(StatisticsEquation):
 			cov_numerator_products.append(round((self.x[i] - self.x_mean) * (self.y[i] - self.y_mean), 2))
 		
 		cov_solving_steps = [
-			f"{frac(" + ".join(cov_numerator), f'{len(self.x)} - 1')} {new_line()}",
-			f"{frac(" + ".join(list(map(str, cov_numerator_products))), len(self.x) - 1)} {new_line()}",
-			f"{frac(round(sum(cov_numerator_products), 2), len(self.x) - 1)} {new_line()}",
-			f"{round(sum(cov_numerator_products) / (len(self.x) - 1), 2)} \n"
+			f"{frac(" + ".join(cov_numerator), self.denominator)} {new_line()}",
+			f"{frac(" + ".join(list(map(str, cov_numerator_products))), self.denominator)} {new_line()}",
+			f"{frac(round(sum(cov_numerator_products), 2), self.denominator)} {new_line()}",
+			f"{round(sum(cov_numerator_products) / self.denominator, 2)} \n"
 		]
 
 		output += f"{cov_prefix}".join(cov_solving_steps)
