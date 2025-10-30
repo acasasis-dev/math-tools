@@ -1,13 +1,18 @@
-from .mean import Mean
+from .lib import StatisticsEquation
 from math_tools.tools.latex import new_line, frac, get_sd_symbol
 from .mean import Mean
 
 
-class Variance(Mean):
+class Variance(StatisticsEquation):
 	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
-		super().__init__(data, label, population, tabs, False)
-		self.environment = environment
-		_mean_obj = super()
+		super().__init__(data, label, population, tabs, environment)
+		_mean_obj = Mean(
+			self.data,
+			self.label,
+			self.population,
+			self.tabs,
+			False
+		)
 		self._mean = _mean_obj.result
 		self.data_len = len(self.data)
 		self.denominator = self.data_len if self.population == "full" else self.data_len - 1
