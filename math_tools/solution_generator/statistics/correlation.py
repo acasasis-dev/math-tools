@@ -1,6 +1,7 @@
 from .lib import StatisticsEquation
 from .covariance import Covariance
 from .standard_deviation import StandardDeviation
+from math_tools.tools.latex import new_line
 
 
 class Correlation(StatisticsEquation):
@@ -24,9 +25,10 @@ class Correlation(StatisticsEquation):
 				self.label,
 				self.population,
 				self.tabs,
-				self.environment
+				False
 			)
 			self.covariance = _covariance.result
+			self.covariance_latex = _covariance.latex
 		else:
 			self.covariance = covariance
 
@@ -36,9 +38,10 @@ class Correlation(StatisticsEquation):
 				self.label,
 				self.population,
 				self.tabs,
-				self.environment
+				False
 			)
 			self.x_sd = _x_sd.result
+			self.x_sd_latex = _x_sd.latex
 		else:
 			self.x_sd = x_sd
 
@@ -48,9 +51,10 @@ class Correlation(StatisticsEquation):
 				self.label,
 				self.population,
 				self.tabs,
-				self.environment
+				False
 			)
 			self.y_sd = _y_sd.result
+			self.y_sd_latex = _y_sd.latex
 		else:
 			self.y_sd = y_sd
 	
@@ -60,4 +64,15 @@ class Correlation(StatisticsEquation):
 
 	@property
 	def latex(self):
-		pass
+		output = self.covariance_latex + f"{new_line() * 2}"
+		output += self.x_sd_latex + new_line()
+		output += self.y_sd_latex
+
+		if self.environment:
+			output = (
+				"\\begin{gather*}\n"
+				f"{output}"
+				"\\end{gather*}"
+			)
+
+		return output
