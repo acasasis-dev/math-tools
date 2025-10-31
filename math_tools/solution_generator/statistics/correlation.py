@@ -1,8 +1,7 @@
 from .lib import StatisticsEquation
 from .covariance import Covariance
 from .standard_deviation import StandardDeviation
-from math_tools.tools.latex import new_line, text, frac
-
+from math_tools.tools.latex import new_line, text, frac, get_sd_symbol
 
 class Correlation(StatisticsEquation):
 	def __init__(self, data=[], label=("x", "y"), population="full", tabs=1, environment=True, covariance=None, x_sd=None, y_sd=None):
@@ -12,6 +11,7 @@ class Correlation(StatisticsEquation):
 		elif self.data:
 			self.x, self.y = data
 
+		sd_symbol = get_sd_symbol(population, label)
 		if not covariance:
 			if len(self.x) != len(self.y):
 				raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
@@ -31,6 +31,7 @@ class Correlation(StatisticsEquation):
 			self.covariance_latex = _covariance.latex
 		else:
 			self.covariance = covariance
+			self.covariance_latex = f"{"\t" * tabs}Cov[x,y] = {covariance}"
 
 		if not x_sd:
 			_x_sd = StandardDeviation(
@@ -44,6 +45,7 @@ class Correlation(StatisticsEquation):
 			self.x_sd_latex = _x_sd.latex
 		else:
 			self.x_sd = x_sd
+			self.x_sd_latex = f"{"\t" * tabs}{sd_symbol}{x_sd}"
 
 		if not y_sd:
 			_y_sd = StandardDeviation(
@@ -57,6 +59,7 @@ class Correlation(StatisticsEquation):
 			self.y_sd_latex = _y_sd.latex
 		else:
 			self.y_sd = y_sd
+			self.y_sd_latex = f"{"\t" * tabs}{sd_symbol}{y_sd}"
 	
 	@property
 	def result(self):
