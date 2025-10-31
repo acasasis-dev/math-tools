@@ -66,9 +66,12 @@ class Correlation(StatisticsEquation):
 	def latex(self):
 		output = self.covariance_latex + f"{new_line() * 2}"
 		output += self.x_sd_latex + new_line()
-		output += self.y_sd_latex
+		output += self.y_sd_latex + new_line()
 		prefix = f"\\rho_{text("".join(self.label))}" if self.population == "full" else f"r_{text("".join(self.label))}"
-
+		output += f"{"\t" * self.tabs}{prefix} = {frac(self.covariance, f"({self.x_sd})({self.y_sd})")} {new_line()}"
+		output += f"{"\t" * self.tabs}{prefix} = {frac(self.covariance, round(self.x_sd * self.y_sd, 2))} {new_line()}"
+		output += f"{'\t' * self.tabs}{prefix} = {self.result} \n"
+		
 		if self.environment:
 			output = (
 				"\\begin{gather*}\n"
