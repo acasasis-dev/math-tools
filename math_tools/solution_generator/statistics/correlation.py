@@ -1,7 +1,7 @@
 from .lib import StatisticsEquation
 from .covariance import Covariance
 from .standard_deviation import StandardDeviation
-from math_tools.tools.latex import new_line
+from math_tools.tools.latex import new_line, text, frac
 
 
 class Correlation(StatisticsEquation):
@@ -67,6 +67,7 @@ class Correlation(StatisticsEquation):
 		output = self.covariance_latex + f"{new_line() * 2}"
 		output += self.x_sd_latex + new_line()
 		output += self.y_sd_latex
+		prefix = f"\\rho_{text("".join(self.label))}" if self.population == "full" else f"r_{text("".join(self.label))}"
 
 		if self.environment:
 			output = (
