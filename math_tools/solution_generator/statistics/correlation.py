@@ -29,10 +29,20 @@ class Correlation(StatisticsEquation):
 			self.covariance = _covariance.result
 		else:
 			self.covariance = covariance
+
+		if not x_sd:
+			pass
+		else:
+			self.x_sd = x_sd
+
+		if not y_sd:
+			pass
+		else:
+			self.y_sd = y_sd
 	
 	@property
 	def result(self):
-		pass
+		return round(self.covariance / (self.x_sd * self.y_sd), 2)
 
 	@property
 	def latex(self):
