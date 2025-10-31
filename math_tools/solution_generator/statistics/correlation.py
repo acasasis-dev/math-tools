@@ -9,5 +9,9 @@ class Correlation(StatisticsEquation):
 		super().__init__(data, label, population, tabs, environment)
 	
 	@property
+	def result(self):
+		pass
+
+	@property
 	def latex(self):
 		pass
