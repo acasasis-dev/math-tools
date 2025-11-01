@@ -10,16 +10,19 @@ class Correlation(StatisticsEquation):
 			raise Exception(f"length of data must exactly be 2")
 		elif self.data:
 			self.x, self.y = data
+		else:
+			self.x, self.y = [[], []]
+
+		if len(self.label) != 2:
+			raise Exception(f"length of labels must exactly be 2")
+			
+		self.x_label, self.y_label = self.label
 
 		sd_symbol = get_sd_symbol(population, label)
-		if not covariance:
-			if len(self.x) != len(self.y):
+		if len(self.x) != len(self.y):
 				raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
-			
-			if len(self.label) != 2:
-				raise Exception(f"length of labels must exactly be 2")
-			
-			self.x_label, self.y_label = self.label
+		
+		if not covariance:
 			_covariance = Covariance(
 				self.data,
 				self.label,
