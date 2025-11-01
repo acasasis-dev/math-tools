@@ -18,7 +18,7 @@ class Correlation(StatisticsEquation):
 			
 		self.x_label, self.y_label = self.label
 
-		sd_symbol = get_sd_symbol(population, label)
+		sd_symbol = get_sd_symbol(population, f"{self.x_label}{self.y_label}")
 		if len(self.x) != len(self.y):
 				raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
 		
@@ -39,7 +39,7 @@ class Correlation(StatisticsEquation):
 		if not x_sd:
 			_x_sd = StandardDeviation(
 				self.x,
-				self.label,
+				f"{self.x_label}{self.y_label}",
 				self.population,
 				self.tabs,
 				False
@@ -53,7 +53,7 @@ class Correlation(StatisticsEquation):
 		if not y_sd:
 			_y_sd = StandardDeviation(
 				self.y,
-				self.label,
+				f"{self.x_label}{self.y_label}",
 				self.population,
 				self.tabs,
 				False
