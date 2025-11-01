@@ -35,6 +35,7 @@ class WeightedMean(StatisticsEquation):
 		numerator = " + ".join([f"{num * self.y[i]}" for i, num in enumerate(self.x)])
 		output += f"{prefix}{frac(numerator, self.freq_total)} {new_line()}"
 		output += f"{prefix}{frac(self.numerator, self.freq_total)} {new_line()}"
+		output += f"{prefix}{self.result} {new_line()}"
 
 		if self.environment:
 			output = (
