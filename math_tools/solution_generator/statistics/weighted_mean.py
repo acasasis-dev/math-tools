@@ -2,6 +2,17 @@ from .lib import StatisticsEquation
 
 
 class WeightedMean(StatisticsEquation):
-	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
+	def __init__(self, data=[], label=("x", "y"), population="full", tabs=1, environment=True):
 		super().__init__(data, label, population, tabs, environment)
+		if self.data and len(self.data) != 2:
+			raise Exception(f"length of data must exactly be 2")
+		elif self.data:
+			self.x, self.y = data
+		else:
+			self.x, self.y = [[], []]
 
+		if len(self.label) != 2:
+			raise Exception(f"length of labels must exactly be 2")
+			
+		self.x_label, self.y_label = self.label
+		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
