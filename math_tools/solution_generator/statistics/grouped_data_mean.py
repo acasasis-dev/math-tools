@@ -22,7 +22,7 @@ class GroupedDataMean(StatisticsEquation):
 
 	@property
 	def result(self):
-		pass
+		return round(self.numerator / self.denominator, 2)
 
 	@property
 	def latex(self):
