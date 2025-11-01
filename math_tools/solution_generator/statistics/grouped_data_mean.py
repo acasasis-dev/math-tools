@@ -1,4 +1,5 @@
 from .lib import StatisticsEquation
+from math_tools.tools.latex import new_line
 
 
 class GroupedDataMean(StatisticsEquation):
@@ -26,4 +27,8 @@ class GroupedDataMean(StatisticsEquation):
 
 	@property
 	def latex(self):
-		pass
+		ranges = [f"{self.x[i]}: {num}" for i, num in enumerate(self.y)]
+		output = ", ".join(ranges)
+		output += new_line()
+		
+		return output
