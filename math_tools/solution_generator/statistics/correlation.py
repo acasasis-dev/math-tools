@@ -17,15 +17,16 @@ class Correlation(StatisticsEquation):
 			raise Exception(f"length of labels must exactly be 2")
 			
 		self.x_label, self.y_label = self.label
+		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
 
-		sd_symbol = get_sd_symbol(population, f"{self.x_label}{self.y_label}")
+		sd_symbol = get_sd_symbol(population, self.label)
 		if len(self.x) != len(self.y):
 				raise Exception(f"length of x must be the same as y. {len(self.x)} != {len(self.y)}")
 		
 		if not covariance:
 			_covariance = Covariance(
 				self.data,
-				self.label,
+				[self.x_label, self.y_label],
 				self.population,
 				self.tabs,
 				False
@@ -39,7 +40,7 @@ class Correlation(StatisticsEquation):
 		if not x_sd:
 			_x_sd = StandardDeviation(
 				self.x,
-				f"{self.x_label}{self.y_label}",
+				self.label,
 				self.population,
 				self.tabs,
 				False
@@ -53,7 +54,7 @@ class Correlation(StatisticsEquation):
 		if not y_sd:
 			_y_sd = StandardDeviation(
 				self.y,
-				f"{self.x_label}{self.y_label}",
+				self.label,
 				self.population,
 				self.tabs,
 				False
