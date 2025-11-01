@@ -23,7 +23,7 @@ class WeightedMean(StatisticsEquation):
 
 	@property
 	def result(self):
-		return self.numerator / self.freq_total
+		return round(self.numerator / self.freq_total, 2)
 
 	@property
 	def latex(self):
