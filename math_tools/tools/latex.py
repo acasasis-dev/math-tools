@@ -35,5 +35,10 @@ def get_sd_symbol(population, label, variance=False):
 	return f"{prefix}{"_" + text(label) if label else ""} = "
 
 
+def get_mean_symbol(population, label=None):
+	prefix = mu(label) if population == "full" else x_bar(label)
+	return f"{prefix} = "
+
+
 def sqrt(num):
 	return f"\\sqrt{enclosed_brace(num)}"
