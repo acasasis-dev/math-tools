@@ -28,8 +28,8 @@ class GroupedDataMean(StatisticsEquation):
 	@property
 	def latex(self):
 		ranges = [f"{self.x[i]}: {num}" for i, num in enumerate(self.y)]
-		output = ", ".join(ranges)
-		output += new_line()
+		output = f"{"\t" * self.tabs}{", ".join(ranges)}"
+		output += new_line() * 2
 
 		if self.environment:
 			output = (
