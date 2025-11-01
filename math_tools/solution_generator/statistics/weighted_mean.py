@@ -32,7 +32,7 @@ class WeightedMean(StatisticsEquation):
 		numerator = " + ".join([f"[({num})({self.y[i]})]" for i, num in enumerate(self.x)])
 		denominator = " + ".join(list(map(str, self.y)))
 		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
-		numerator = " + ".join([f"{num * self.y[i]}" for i, num in enumerate(self.x)])
+		numerator = " + ".join([f"{round(num * self.y[i], 2)}" for i, num in enumerate(self.x)])
 		output += f"{prefix}{frac(numerator, self.freq_total)} {new_line()}"
 		output += f"{prefix}{frac(self.numerator, self.freq_total)} {new_line()}"
 		output += f"{prefix}{self.result} {new_line()}"
