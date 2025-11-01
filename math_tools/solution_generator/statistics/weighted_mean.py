@@ -1,5 +1,5 @@
 from .lib import StatisticsEquation
-from math_tools.tools.latex import new_line
+from math_tools.tools.latex import frac, get_mean_symbol
 
 
 class WeightedMean(StatisticsEquation):
@@ -27,4 +27,7 @@ class WeightedMean(StatisticsEquation):
 
 	@property
 	def latex(self):
-		pass
+		output = ""
+		prefix = f"{"\t" * self.tabs}{get_mean_symbol(self.population)}"
+
+		return output
