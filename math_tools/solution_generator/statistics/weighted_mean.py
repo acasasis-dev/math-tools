@@ -16,3 +16,11 @@ class WeightedMean(StatisticsEquation):
 			
 		self.x_label, self.y_label = self.label
 		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
+
+	@property
+	def result(self):
+		pass
+
+	@property
+	def latex(self):
+		pass
