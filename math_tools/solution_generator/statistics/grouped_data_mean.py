@@ -16,6 +16,9 @@ class GroupedDataMean(StatisticsEquation):
 			 
 		self.x_label, self.y_label = self.label
 		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
+		self.denominator = sum(self.y) - (1 if population == "sample" else 0)
+		self.midpoints = [start + ((end - start) / 2) for start, end in self.x]
+		self.numerator = round(sum([num * self.midpoints[i] for i, num in enumerate(self.y)]), 2)
 
 	@property
 	def result(self):
@@ -24,4 +27,3 @@ class GroupedDataMean(StatisticsEquation):
 	@property
 	def latex(self):
 		pass
-	
