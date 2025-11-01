@@ -29,5 +29,12 @@ class WeightedMean(StatisticsEquation):
 	def latex(self):
 		output = ""
 		prefix = f"{"\t" * self.tabs}{get_mean_symbol(self.population)}"
+		
+		if self.environment:
+			output = (
+				"\\begin{gather*}\n"
+				f"{output}"
+				"\\end{gather*}"
+			)
 
 		return output
