@@ -1,4 +1,5 @@
 from .lib import StatisticsEquation
+from math_tools.tools.latex import new_line
 
 
 class WeightedMean(StatisticsEquation):
@@ -13,13 +14,16 @@ class WeightedMean(StatisticsEquation):
 
 		if len(self.label) != 2:
 			raise Exception(f"length of labels must exactly be 2")
-			
+			 
 		self.x_label, self.y_label = self.label
 		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
+		
+		self.freq_total = sum(self.y)
+		self.numerator = sum([num * self.y[i] for i, num in enumerate(self.x)])
 
 	@property
 	def result(self):
-		pass
+		return self.numerator / self.freq_total
 
 	@property
 	def latex(self):
