@@ -31,7 +31,9 @@ class WeightedMean(StatisticsEquation):
 		prefix = f"{"\t" * self.tabs}{get_mean_symbol(self.population)}"
 		numerator = " + ".join([f"[({num})({self.y[i]})]" for i, num in enumerate(self.x)])
 		denominator = " + ".join(list(map(str, self.y)))
-		output = f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		numerator = " + ".join([f"{num * self.y[i]}" for i, num in enumerate(self.x)])
+		output += f"{prefix}{frac(numerator, self.freq_total)} {new_line()}"
 
 		if self.environment:
 			output = (
