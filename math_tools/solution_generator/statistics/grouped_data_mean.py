@@ -30,5 +30,12 @@ class GroupedDataMean(StatisticsEquation):
 		ranges = [f"{self.x[i]}: {num}" for i, num in enumerate(self.y)]
 		output = ", ".join(ranges)
 		output += new_line()
-		
+
+		if self.environment:
+			output = (
+				"\\begin{gather*}\n"
+				f"{output}"
+				"\\end{gather*}"
+			)
+
 		return output
