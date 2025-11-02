@@ -32,7 +32,16 @@ def x_bar(label):
 
 def get_sd_symbol(population, label, variance=False):
 	prefix = f"{sigma() if population == "full" else f"s"}{"^2" if variance else ""}"
-	return f"{prefix}{"_" + text(label) if label else ""} = "
+	if label and type(label) in [list, tuple]:
+		x, y = label
+		if len(x) + len(y) == 2:
+			return f"{prefix}{"_" + text(f"{x}{y}")} = "
+		else:
+			return f"{prefix}{"_" + text(f"[{x}, {y}]")}  = "
+	elif label:
+		return f"{prefix}{"_" + text(label)} = "
+	else:
+		return f"{prefix} = "
 
 
 def get_mean_symbol(population, label=None):
