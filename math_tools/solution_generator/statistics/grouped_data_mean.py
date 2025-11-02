@@ -33,6 +33,8 @@ class GroupedDataMean(StatisticsEquation):
 		numerator = " + ".join([f"[({num})({int(self.midpoints[i])})]" for i, num in enumerate(self.y)])
 		denominator = " + ".join(list(map(str, self.y)))
 		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		numerator = " + ".join([str(round(num * int(self.midpoints[i]), 2)) for i, num in enumerate(self.y)])
+		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
 
 		if self.environment:
 			output = (
