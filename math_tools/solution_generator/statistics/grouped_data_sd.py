@@ -1,9 +1,11 @@
 from .lib import StatisticsEquation
 from .grouped_data_variance import GroupedDataVariance
 
+from math import sqrt
+
 
 class GroupedDataSD(StatisticsEquation):
-	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
+	def __init__(self, data, label=("x", "y"), population="full", tabs=1, environment=True):
 		super().__init__(data, label, population, tabs, environment)
 		self.gdv = GroupedDataVariance(
 			self.data,
@@ -15,7 +17,7 @@ class GroupedDataSD(StatisticsEquation):
 
 	@property
 	def result(self):
-		pass
+		return round(sqrt(self.gdv.result), 2)
 
 	@property
 	def latex(self):
