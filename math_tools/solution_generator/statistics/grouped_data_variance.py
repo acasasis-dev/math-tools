@@ -1,6 +1,8 @@
 from .lib import StatisticsEquation
 from .grouped_data_mean import GroupedDataMean
 
+from math_tools.tools.latex import get_sd_symbol
+
 
 class GroupedDataVariance(StatisticsEquation):
 	def __init__(self, data, label=("x", "y"), population="full", tabs=1, environment=True):
@@ -22,6 +24,7 @@ class GroupedDataVariance(StatisticsEquation):
 
 	@property
 	def latex(self):
+		prefix = get_sd_symbol(self.population, self.label, variance=True)
 		output = self.gdm_latex
 
 		return output
