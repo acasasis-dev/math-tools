@@ -33,6 +33,8 @@ class GroupedDataVariance(StatisticsEquation):
 		denominator = sum(self.gdm.y)
 		denominator = f"{denominator} - 1" if self.population == "sample" else denominator
 		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		numerator = " + ".join([f"({num})({round((self.gdm.midpoints[i] - self.gdm.result) ** 2, 2)})" for i, num in enumerate(self.gdm.y)])
+		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
 
 		if self.environment:
 			output = (
