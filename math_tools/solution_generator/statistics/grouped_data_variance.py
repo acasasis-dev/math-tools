@@ -23,22 +23,22 @@ class GroupedDataVariance(StatisticsEquation):
 
 	@property
 	def latex(self):
-		prefix = f"{"\t" * self.tabs}{get_sd_symbol(self.population, self.label, variance=True)}"
+		self.prefix = f"{"\t" * self.tabs}{get_sd_symbol(self.population, self.label, variance=True)}"
 		output = self.gdm.latex + (new_line() * 2)
 		numerator = " + ".join([f"[{num}({self.gdm.midpoints[i]} - {self.gdm.result})^2]" for i, num in enumerate(self.gdm.y)])
 		denominator = " + ".join(list(map(str, self.gdm.y)))
 		denominator = f"({denominator}) - 1" if self.population == "sample" else denominator
-		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		output += f"{self.prefix}{frac(numerator, denominator)} {new_line()}"
 		numerator = " + ".join([f"[{num}({round(self.gdm.midpoints[i] - self.gdm.result, 2)})^2]" for i, num in enumerate(self.gdm.y)])
 		denominator = sum(self.gdm.y)
 		denominator = f"{denominator} - 1" if self.population == "sample" else denominator
-		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		output += f"{self.prefix}{frac(numerator, denominator)} {new_line()}"
 		numerator = " + ".join([f"({num})({round((self.gdm.midpoints[i] - self.gdm.result) ** 2, 2)})" for i, num in enumerate(self.gdm.y)])
-		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
+		output += f"{self.prefix}{frac(numerator, self.denominator)} {new_line()}"
 		numerator = " + ".join([f"{round(num * ((self.gdm.midpoints[i] - self.gdm.result) ** 2), 2)}" for i, num in enumerate(self.gdm.y)])
-		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
-		output += f"{prefix}{frac(self.numerator, self.denominator)} {new_line()}"
-		output += f"{prefix}{self.result} \n"
+		output += f"{self.prefix}{frac(numerator, self.denominator)} {new_line()}"
+		output += f"{self.prefix}{frac(self.numerator, self.denominator)} {new_line()}"
+		output += f"{self.prefix}{self.result} \n"
 
 		if self.environment:
 			output = (
