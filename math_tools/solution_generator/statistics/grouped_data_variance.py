@@ -30,5 +30,12 @@ class GroupedDataVariance(StatisticsEquation):
 		denominator = f"({denominator}) - 1" if self.population == "sample" else denominator
 		output += f"{"\t" * self.tabs}{prefix}{frac(numerator, denominator)} {new_line()}"
 
+		if self.environment:
+			output = (
+				"\\begin{gather*}\n"
+				f"{output}"
+				"\\end{gather*}"
+			)
+
 		return output
 	
