@@ -19,7 +19,7 @@ class GroupedDataMean(StatisticsEquation):
 		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
 		self.denominator = sum(self.y)
 		self.midpoints = [start + ((end - start) / 2) for start, end in self.x]
-		self.numerator = round(sum([num * self.midpoints[i] for i, num in enumerate(self.y)]), 2)
+		self.numerator = sum([num * self.midpoints[i] for i, num in enumerate(self.y)])
 
 	@property
 	def result(self):
@@ -35,6 +35,7 @@ class GroupedDataMean(StatisticsEquation):
 		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
 		numerator = " + ".join([str(round(num * int(self.midpoints[i]), 2)) for i, num in enumerate(self.y)])
 		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
+		output += f"{prefix}{frac(self.numerator, self.denominator)} {new_line()}"
 
 		if self.environment:
 			output = (
