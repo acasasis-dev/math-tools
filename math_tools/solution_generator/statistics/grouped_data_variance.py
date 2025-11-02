@@ -1,9 +1,18 @@
 from .lib import StatisticsEquation
+from .grouped_data_mean import GroupedDataMean
 
 
 class GroupedDataVariance(StatisticsEquation):
-	def __init__(self, data, label=None, population="full", tabs=1, environment=True):
+	def __init__(self, data, label=("x", "y"), population="full", tabs=1, environment=True):
 		super().__init__(data, label, population, tabs, environment)
+		gdm = GroupedDataMean(
+			self.data,
+			self.label,
+			self.population,
+			self.tabs,
+			self.environment,
+		)
+		self.numerator = round(sum([num * (gdm.midpoints[i] - gdm.result) for i, num in enumerate(gdm.y)]), 2)
 
 	@property
 	def result(self):
