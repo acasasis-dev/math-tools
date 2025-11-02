@@ -23,8 +23,9 @@ class GroupedDataSD(StatisticsEquation):
 	@property
 	def latex(self):
 		output = self.gdsd.latex + f"{new_line() * 2}"
-		output += f"{self.gdsd.prefix}{s(self.gdsd.result)} {new_line()}"
-		output += f"{self.gdsd.prefix}{self.result} \n"
+		prefix = self.gdsd.prefix.replace("^2", "")
+		output += f"{prefix}{s(self.gdsd.result)} {new_line()}"
+		output += f"{prefix}{self.result} \n"
 
 		if self.environment:
 			output = (
