@@ -13,6 +13,7 @@ class GroupedDataVariance(StatisticsEquation):
 			self.environment,
 		)
 		self.numerator = round(sum([num * (gdm.midpoints[i] - gdm.result) for i, num in enumerate(gdm.y)]), 2)
+		self.denominator = sum(gdm.y) + (1 if self.population == "full" else 0)
 
 	@property
 	def result(self):
