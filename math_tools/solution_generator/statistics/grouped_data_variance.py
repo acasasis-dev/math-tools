@@ -1,7 +1,7 @@
 from .lib import StatisticsEquation
 from .grouped_data_mean import GroupedDataMean
 
-from math_tools.tools.latex import get_sd_symbol, new_line
+from math_tools.tools.latex import get_sd_symbol, new_line, frac
 
 
 class GroupedDataVariance(StatisticsEquation):
@@ -28,6 +28,7 @@ class GroupedDataVariance(StatisticsEquation):
 		numerator = " + ".join([f"[{num}({self.gdm.midpoints[i]} - {self.gdm.result})^2]" for i, num in enumerate(self.gdm.y)])
 		denominator = " + ".join(list(map(str, self.gdm.y)))
 		denominator = f"({denominator}) - 1" if self.population == "sample" else denominator
+		output += f"{"\t" * self.tabs}{prefix}{frac(numerator, denominator)} {new_line()}"
 
 		return output
 	
