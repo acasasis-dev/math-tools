@@ -1,5 +1,5 @@
 from .lib import StatisticsEquation
-from math_tools.tools.latex import new_line, frac
+from math_tools.tools.latex import new_line, frac, get_mean_symbol
 
 
 class GroupedDataMean(StatisticsEquation):
@@ -27,11 +27,12 @@ class GroupedDataMean(StatisticsEquation):
 
 	@property
 	def latex(self):
+		prefix = f"{"\t" * self.tabs}{get_mean_symbol(self.population)}"
 		ranges = [f"{self.x[i]}: {num}" for i, num in enumerate(self.y)]
 		output = f"{"\t" * self.tabs}{", ".join(ranges)} {new_line() * 2}"
 		numerator = " + ".join([f"[({num})({int(self.midpoints[i])})]" for i, num in enumerate(self.y)])
 		denominator = " + ".join(list(map(str, self.y)))
-		output += f"{"\t" * self.tabs}{frac(numerator, denominator)} {new_line()}"
+		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
 
 		if self.environment:
 			output = (
