@@ -23,12 +23,16 @@ class GroupedDataVariance(StatisticsEquation):
 
 	@property
 	def latex(self):
-		prefix = get_sd_symbol(self.population, self.label, variance=True)
-		output = self.gdm.latex
+		prefix = f"{"\t" * self.tabs}{get_sd_symbol(self.population, self.label, variance=True)}"
+		output = self.gdm.latex + (new_line() * 2)
 		numerator = " + ".join([f"[{num}({self.gdm.midpoints[i]} - {self.gdm.result})^2]" for i, num in enumerate(self.gdm.y)])
 		denominator = " + ".join(list(map(str, self.gdm.y)))
 		denominator = f"({denominator}) - 1" if self.population == "sample" else denominator
-		output += f"{"\t" * self.tabs}{prefix}{frac(numerator, denominator)} {new_line()}"
+		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
+		numerator = " + ".join([f"[{num}({round(self.gdm.midpoints[i] - self.gdm.result, 2)})^2]" for i, num in enumerate(self.gdm.y)])
+		denominator = sum(self.gdm.y)
+		denominator = f"{denominator} - 1" if self.population == "sample" else denominator
+		output += f"{prefix}{frac(numerator, denominator)} {new_line()}"
 
 		if self.environment:
 			output = (
