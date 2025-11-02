@@ -10,10 +10,11 @@ class GroupedDataVariance(StatisticsEquation):
 			self.label,
 			self.population,
 			self.tabs,
-			self.environment,
+			False
 		)
 		self.numerator = round(sum([num * ((gdm.midpoints[i] - gdm.result)**2) for i, num in enumerate(gdm.y)]), 2)
 		self.denominator = sum(gdm.y) - (1 if self.population == "sample" else 0)
+		self.gdm_latex = gdm.latex
 
 	@property
 	def result(self):
@@ -21,5 +22,7 @@ class GroupedDataVariance(StatisticsEquation):
 
 	@property
 	def latex(self):
-		pass
+		output = self.gdm_latex
+
+		return output
 	
