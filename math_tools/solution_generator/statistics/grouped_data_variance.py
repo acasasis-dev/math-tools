@@ -37,6 +37,7 @@ class GroupedDataVariance(StatisticsEquation):
 		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
 		numerator = " + ".join([f"{round(num * ((self.gdm.midpoints[i] - self.gdm.result) ** 2), 2)}" for i, num in enumerate(self.gdm.y)])
 		output += f"{prefix}{frac(numerator, self.denominator)} {new_line()}"
+		output += f"{prefix}{frac(self.numerator, self.denominator)} \n"
 
 		if self.environment:
 			output = (
