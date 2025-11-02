@@ -26,4 +26,11 @@ class GroupedDataSD(StatisticsEquation):
 		output += f"{self.gdsd.prefix}{s(self.gdsd.result)} {new_line()}"
 		output += f"{self.gdsd.prefix}{self.result} \n"
 
+		if self.environment:
+			output = (
+				"\\begin{gather*}\n"
+				f"{output}"
+				"\\end{gather*}"
+			)
+
 		return output
