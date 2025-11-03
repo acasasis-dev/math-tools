@@ -19,7 +19,7 @@ class WeightedMean(StatisticsEquation):
 		self.label = f"{self.x_label}{self.y_label}" if len(self.x_label) + len(self.y_label) == 2 else f"[{self.x_label}, {self.y_label}]"
 		
 		self.freq_total = sum(self.y)
-		self.numerator = sum([num * self.y[i] for i, num in enumerate(self.x)])
+		self.numerator = round(sum([num * self.y[i] for i, num in enumerate(self.x)]), 2)
 
 	@property
 	def result(self):
