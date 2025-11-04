@@ -1,5 +1,7 @@
 from .lib import ProbabilityEquation
 
+from math_tools.tools.latex import text
+
 
 class SimpleProbability(ProbabilityEquation):
 	def __init__(self, fav_outcomes, all_outcomes, label, tabs=1):
@@ -11,4 +13,5 @@ class SimpleProbability(ProbabilityEquation):
 
 	@property
 	def latex(self):
+		prefix = f"{"\t" * self.tabs}P({text(self.label)}) = "
 		return super(ProbabilityEquation, self).latex
