@@ -2,8 +2,8 @@ from .lib import ProbabilityEquation
 
 
 class SimpleProbability(ProbabilityEquation):
-	def __init__(self, fav_outcomes, all_outcomes):
-		super().__init__(fav_outcomes, all_outcomes)
+	def __init__(self, fav_outcomes, all_outcomes, label, tabs=1):
+		super().__init__(fav_outcomes, all_outcomes, label=label, tabs=tabs)
 
 	@property
 	def result(self):
