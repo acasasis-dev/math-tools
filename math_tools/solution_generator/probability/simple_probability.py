@@ -7,7 +7,7 @@ class SimpleProbability(ProbabilityEquation):
 
 	@property
 	def result(self):
-		pass
+		return round(self.fav_outcomes / self.all_outcomes, 2)
 
 	@property
 	def latex(self):
