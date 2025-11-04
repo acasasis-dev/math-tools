@@ -10,4 +10,11 @@ class Equation(ABC):
 	@property
 	@abstractmethod
 	def latex(self):
-		pass
+		if self.environment:
+			self.output = (
+				"\\begin{gather*} \n"
+				f"{self.output}"
+				"\\end{gather*}"
+			)
+
+		return self.output
