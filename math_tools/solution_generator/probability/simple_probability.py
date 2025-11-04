@@ -1,6 +1,6 @@
 from .lib import ProbabilityEquation
 
-from math_tools.tools.latex import text
+from math_tools.tools.latex import text, frac, new_line
 
 
 class SimpleProbability(ProbabilityEquation):
@@ -9,9 +9,11 @@ class SimpleProbability(ProbabilityEquation):
 
 	@property
 	def result(self):
-		return round(self.fav_outcomes / self.all_outcomes, 2)
+		return round(self.fav_outcomes / self.all_outcomes, 2) * 100
 
 	@property
 	def latex(self):
 		prefix = f"{"\t" * self.tabs}P({text(self.label)}) = "
+		self.output = f"{prefix}{frac(self.fav_outcomes, self.all_outcomes)} = {round(self.fav_outcomes / self.all_outcomes, 2)} = {self.result}\\% {new_line()}"
+
 		return super(ProbabilityEquation, self).latex
