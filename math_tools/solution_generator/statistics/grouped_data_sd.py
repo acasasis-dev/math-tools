@@ -26,12 +26,6 @@ class GroupedDataSD(StatisticsEquation):
 		prefix = self.gdsd.prefix.replace("^2", "")
 		output += f"{prefix}{s(self.gdsd.result)} {new_line()}"
 		output += f"{prefix}{self.result} \n"
+		self.output = output
 
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
-
-		return output
+		return super(StatisticsEquation, self).latex

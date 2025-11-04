@@ -17,12 +17,6 @@ class Mean(StatisticsEquation):
 		points_stringified = " + ".join(list(map(str, self.data)))
 		points_len = len(self.data)
 		prefix = get_mean_symbol(self.population, self.label)
-		output = f"{'\t' * self.tabs}{prefix}{frac(points_stringified, points_len)} = {frac(sum(self.data), points_len)} = {points_mean} {new_line()}"
-		if self.environment:
-			output = (
-				"\\begin{gather*} \n"
-				f"{output}"
-				"\\end{gather*}"
-			)
-
-		return output
+		self.output = f"{'\t' * self.tabs}{prefix}{frac(points_stringified, points_len)} = {frac(sum(self.data), points_len)} = {points_mean} {new_line()}"
+		
+		return super(StatisticsEquation, self).latex

@@ -36,12 +36,6 @@ class WeightedMean(StatisticsEquation):
 		output += f"{prefix}{frac(numerator, self.freq_total)} {new_line()}"
 		output += f"{prefix}{frac(self.numerator, self.freq_total)} {new_line()}"
 		output += f"{prefix}{self.result} {new_line()}"
+		self.output = output
 
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
-
-		return output
+		return super(StatisticsEquation, self).latex

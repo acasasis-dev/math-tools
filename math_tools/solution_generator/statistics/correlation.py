@@ -78,12 +78,6 @@ class Correlation(StatisticsEquation):
 		output += f"{"\t" * self.tabs}{prefix} = {frac(self.covariance, f"({self.x_sd})({self.y_sd})")} {new_line()}"
 		output += f"{"\t" * self.tabs}{prefix} = {frac(self.covariance, round(self.x_sd * self.y_sd, 2))} {new_line()}"
 		output += f"{'\t' * self.tabs}{prefix} = {self.result} \n"
-		
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
+		self.output = output
 
-		return output
+		return super(StatisticsEquation, self).latex

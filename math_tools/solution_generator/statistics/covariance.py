@@ -54,12 +54,6 @@ class Covariance(StatisticsEquation):
 		]
 
 		output += f"{cov_prefix}".join(cov_solving_steps)
+		self.output = output
 
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
-
-		return output
+		return super(StatisticsEquation, self).latex

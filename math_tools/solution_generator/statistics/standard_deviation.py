@@ -28,11 +28,6 @@ class StandardDeviation(StatisticsEquation):
 		prefix = get_sd_symbol(self.population, self.label)
 		output += f"{"\t" * self.tabs}{prefix} {sqrt(round(self._variance, 2))} {new_line()}"
 		output += f"{"\t" * self.tabs}{prefix} {self.result} {new_line()}"
-		
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
-		return output
+		self.output = output
+
+		return super(StatisticsEquation, self).latex

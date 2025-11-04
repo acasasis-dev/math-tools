@@ -39,13 +39,7 @@ class GroupedDataVariance(StatisticsEquation):
 		output += f"{self.prefix}{frac(numerator, self.denominator)} {new_line()}"
 		output += f"{self.prefix}{frac(self.numerator, self.denominator)} {new_line()}"
 		output += f"{self.prefix}{self.result} \n"
+		self.output = output
 
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
-
-		return output
+		return super(StatisticsEquation, self).latex
 	

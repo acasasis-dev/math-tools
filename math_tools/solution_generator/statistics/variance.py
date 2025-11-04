@@ -53,11 +53,6 @@ class Variance(StatisticsEquation):
 					)} {new_line()}"
 				)
 
-		if self.environment:
-			output = (
-				"\\begin{gather*}\n"
-				f"{output}"
-				"\\end{gather*}"
-			)
+		self.output = output
 
-		return output
+		return super(StatisticsEquation, self).latex
