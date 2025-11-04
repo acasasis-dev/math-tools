@@ -13,7 +13,7 @@ class SimpleProbability(ProbabilityEquation):
 			all_outcomes = sum(self.all_outcomes)
 		else:
 			all_outcomes = self.all_outcomes
-		return round(self.fav_outcomes / all_outcomes, 2) * 100
+		return round(round(self.fav_outcomes / all_outcomes, 2) * 100, 2)
 
 	@property
 	def latex(self):
@@ -25,4 +25,5 @@ class SimpleProbability(ProbabilityEquation):
 			mid = frac(self.fav_outcomes, self.all_outcomes)
 			suffix = f" = {round(self.fav_outcomes / self.all_outcomes, 2)} = {self.result}\\% {new_line()}"
 		self.output = f"{prefix}{mid}{suffix}"
+
 		return super(ProbabilityEquation, self).latex
