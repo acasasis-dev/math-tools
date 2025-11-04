@@ -11,4 +11,4 @@ class SimpleProbability(ProbabilityEquation):
 
 	@property
 	def latex(self):
-		pass
+		return super(ProbabilityEquation, self).latex
