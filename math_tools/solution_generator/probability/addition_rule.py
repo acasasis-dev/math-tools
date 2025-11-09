@@ -21,7 +21,7 @@ class AdditionRule(Equation):
 		
 	@property
 	def result(self):
-		return round(((self.prob_a + self.prob_b) - self.prob_a_n_b) / self.all_outcomes, 2)
+		return round((((self.prob_a + self.prob_b) - self.prob_a_n_b) / self.all_outcomes) * 100, 2)
 
 	@property
 	def latex(self):
@@ -31,9 +31,10 @@ class AdditionRule(Equation):
 		prob_a_n_b_frac = frac(self.prob_a_n_b, self.all_outcomes)
 		output = f"{prefix}P({text(self.prob_a_label)}) = {prob_a_frac} {new_line()}"
 		output += f"{prefix}P({text(self.prob_b_label)}) = {prob_b_frac} {new_line()}"
-		output += f"{prefix}P({text(self.prob_a_label)} {cap} {text(self.prob_b_label)}) = {prob_a_n_b_frac} {new_line()}"
+		output += f"{prefix}P({text(self.prob_a_label)} {cap} {text(self.prob_b_label)}) = {prob_a_n_b_frac} {new_line() * 2}"
 		prefix = f"{prefix}P({text(self.prob_a_label)} {cup} {text(self.prob_b_label)}) = "
-		output += f"{prefix}{prob_a_frac} + {prob_b_frac} - {prob_a_n_b_frac}"
+		output += f"{prefix}{prob_a_frac} + {prob_b_frac} - {prob_a_n_b_frac} {new_line()}"
+		output += f"{prefix}{frac(round((self.prob_a + self.prob_b) - self.prob_a_n_b, 2), self.all_outcomes)} {new_line()}"
 		self.output = output
 
 		return super().latex
