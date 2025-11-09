@@ -2,6 +2,11 @@ from abc import ABC, abstractmethod
 
 
 class Equation(ABC):
+	def __init__(self, label, tabs, environment):
+		self.label = label
+		self.tabs = tabs
+		self.environment = environment
+
 	@property
 	@abstractmethod
 	def result(self):
