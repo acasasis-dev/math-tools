@@ -9,7 +9,10 @@ class AdditionRule(Equation):
 		self.prob_a = prob_a
 		self.prob_b = prob_b
 		self.prob_a_n_b = prob_a_n_b
-		self.all_outcomes = all_outcomes
+		if isinstance(all_outcomes) in [list, tuple]:
+			self.all_outcomes = sum(all_outcomes)
+		else:
+			self.all_outcomes = all_outcomes
 
 		if type(label) in [list, tuple]:
 			if len(label) != 2:
