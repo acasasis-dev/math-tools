@@ -28,10 +28,12 @@ class AdditionRule(Equation):
 		prefix = "\t" * self.tabs
 		prob_a_frac = frac(self.prob_a, self.all_outcomes)
 		prob_b_frac = frac(self.prob_b, self.all_outcomes)
+		prob_a_n_b_frac = frac(self.prob_a_n_b, self.all_outcomes)
 		output = f"{prefix}P({text(self.prob_a_label)}) = {prob_a_frac} {new_line()}"
 		output += f"{prefix}P({text(self.prob_b_label)}) = {prob_b_frac} {new_line()}"
-		output += f"{prefix}P({text(self.prob_a_label)} {cap} {text(self.prob_b_label)}) = {frac(self.prob_a_n_b, self.all_outcomes)} {new_line()}"
+		output += f"{prefix}P({text(self.prob_a_label)} {cap} {text(self.prob_b_label)}) = {prob_a_n_b_frac} {new_line()}"
 		prefix = f"{prefix}P({text(self.prob_a_label)} {cup} {text(self.prob_b_label)}) = "
+		output += f"{prefix}{prob_a_frac} + {prob_b_frac} - {prob_a_n_b_frac}"
 		self.output = output
 
 		return super().latex
