@@ -1,6 +1,6 @@
 from math_tools.common.equation import Equation
 
-from math_tools.tools.latex import text, frac, new_line, cap, cup
+from math_tools.tools.latex import text, frac, new_line, cap, cup, percent
 
 
 class AdditionRule(Equation):
@@ -36,6 +36,7 @@ class AdditionRule(Equation):
 		output += f"{prefix}{prob_a_frac} + {prob_b_frac} - {prob_a_n_b_frac} {new_line()}"
 		output += f"{prefix}{frac(round((self.prob_a + self.prob_b) - self.prob_a_n_b, 2), self.all_outcomes)} {new_line()}"
 		output += f"{prefix}{round((self.prob_a + self.prob_b) - self.prob_a_n_b/  self.all_outcomes, 2)} {new_line()}"
+		output += f"{prefix}{self.result}{percent} \n"
 		self.output = output
 
 		return super().latex
