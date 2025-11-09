@@ -2,7 +2,7 @@ from math_tools.common.equation import Equation
 
 
 class AdditionRule(Equation):
-	def __init__(self, prob_a, prob_b, prob_a_n_b, all_outcomes, label, tabs, environment):
+	def __init__(self, prob_a, prob_b, prob_a_n_b, all_outcomes, label=["A", "B"], tabs=1, environment=True):
 		super().__init__(label, tabs, environment)
 		self.prob_a = prob_a
 		self.prob_b = prob_b
@@ -14,6 +14,8 @@ class AdditionRule(Equation):
 				raise Exception("label must be a list/tuple with a length of 2")
 		else:
 			raise Exception("label must be a list/tuple")
+		
+		self.prob_a_label, self.prob_b_label = label
 		
 	def result(self):
 		return round(((self.prob_a + self.prob_b) - self.prob_a_n_b) / self.all_outcomes, 2)
