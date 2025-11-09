@@ -55,3 +55,4 @@ def sqrt(num):
 
 cap = "\\cap"
 cup = "\\cup"
+percent = "\%"
