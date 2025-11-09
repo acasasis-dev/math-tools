@@ -51,3 +51,7 @@ def get_mean_symbol(population, label=None):
 
 def sqrt(num):
 	return f"\\sqrt{enclosed_brace(num)}"
+
+
+cap = "\\cap"
+cup = "\\cup"
