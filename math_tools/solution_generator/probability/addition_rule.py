@@ -35,6 +35,7 @@ class AdditionRule(Equation):
 		prefix = f"{prefix}P({text(self.prob_a_label)} {cup} {text(self.prob_b_label)}) = "
 		output += f"{prefix}{prob_a_frac} + {prob_b_frac} - {prob_a_n_b_frac} {new_line()}"
 		output += f"{prefix}{frac(round((self.prob_a + self.prob_b) - self.prob_a_n_b, 2), self.all_outcomes)} {new_line()}"
+		output += f"{prefix}{round((self.prob_a + self.prob_b) - self.prob_a_n_b/  self.all_outcomes, 2)} {new_line()}"
 		self.output = output
 
 		return super().latex
